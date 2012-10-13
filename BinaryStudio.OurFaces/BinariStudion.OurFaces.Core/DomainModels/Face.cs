@@ -2,9 +2,11 @@
 
 namespace BinariStudion.OurFaces.Core.DomainModels
 {
-    class Face
+    public class Face
     {
-        public User User { get; set; }
+        public Guid Id { get; set; }
+
+        public virtual User User { get; set; }
 
         public Guid UserId { get; set; }
 

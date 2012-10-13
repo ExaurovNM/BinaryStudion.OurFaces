@@ -2,7 +2,7 @@
 
 namespace BinariStudion.OurFaces.Core.DomainModels
 {
-    class User
+    public class User
     {
         public Guid Id { get; set; }
 
@@ -10,7 +10,7 @@ namespace BinariStudion.OurFaces.Core.DomainModels
 
         public string Password { get; set; }
 
-        public Face Face { get; set; }
+        public virtual Face Face { get; set; }
 
         public Guid FaceId { get; set; }
     }
