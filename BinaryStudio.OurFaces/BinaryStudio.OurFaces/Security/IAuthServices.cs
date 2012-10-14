@@ -8,7 +8,7 @@ namespace BinaryStudio.OurFaces.Security
 
         bool ValidateUser(string userName, string password);
 
-        void LogOn(string userName);
+        void LogOn(string userName, bool remember);
 
         void LogOff();
     }

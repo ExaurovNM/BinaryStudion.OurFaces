@@ -1,4 +1,5 @@
 using System;
+using System.Web.Security;
 using BinariStudion.OurFaces.Core.DataAccess;
 using BinaryStudio.OurFaces.Common.Utility;
 using Microsoft.VisualBasic.ApplicationServices;
@@ -27,9 +28,9 @@ namespace BinaryStudio.OurFaces.Security
             return this.userRepository.ValidateUser(userName, hashedPassword);
         }
 
-        public void LogOn(string userName)
+        public void LogOn(string userName, bool remember)
         {
-            throw new NotImplementedException();
+            FormsAuthentication.SetAuthCookie(userName, remember);
         }
 
         public void LogOff()

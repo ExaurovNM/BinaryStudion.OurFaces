@@ -1,0 +1,13 @@
+﻿<div>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+        <span>Hello, @User.Identity.Name!</span>
+        }
+        else
+        {
+        @Html.ActionLink("Sign in", "Logon", "Account", null, new { @class = "btn btn-small btn btn-warning" })
+        @Html.ActionLink("Sign up", "Register", "Account", null, new { @class = "btn btn-small" })
+        }
+    }
+</div>
