@@ -2,12 +2,19 @@
     @{
         if (User.Identity.IsAuthenticated)
         {
-        <span>Hello, @User.Identity.Name!</span>
+            <div class="navbar-text form-inline">
+                    Hello, <strong>@User.Identity.Name!</strong>  
+                @Html.ActionLink("Sign out", "LogOff", "Account")
+            </div>
+        
+           
         }
         else
         {
-        @Html.ActionLink("Sign in", "Logon", "Account", null, new { @class = "btn btn-small btn btn-warning" })
-        @Html.ActionLink("Sign up", "Register", "Account", null, new { @class = "btn btn-small" })
+            <div class="btn-toolbar">
+            @Html.ActionLink("Sign in", "Logon", "Account", null, new { @class = "btn btn-small btn btn-warning" })
+            @Html.ActionLink("Sign up", "Register", "Account", null, new { @class = "btn btn-small" })
+            </div>
         }
     }
 </div>

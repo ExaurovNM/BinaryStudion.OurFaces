@@ -35,7 +35,7 @@ namespace BinaryStudio.OurFaces.Security
 
         public void LogOff()
         {
-            throw new NotImplementedException();
+            FormsAuthentication.SignOut();
         }
     }
 }

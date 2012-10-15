@@ -72,6 +72,18 @@ namespace BinaryStudio.OurFaces.Controllers
         }
         #endregion
 
+        #region Logoff
+
+        [HttpGet]
+        public ActionResult Logoff()
+        {
+            this.authService.LogOff();
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        #endregion
+
         [HttpGet]
         public ActionResult Greeting()
         {
