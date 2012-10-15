@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,12 +14,15 @@ namespace BinaryStudio.OurFaces.Controllers
         private readonly IUserRepository userRepository;
         private readonly IAuthService authService;
 
+        private const string KEY_NEW_USERNAME = "username";
+
         public AccountController(IUserRepository userRepository, IAuthService authService)
         {
             this.userRepository = userRepository;
             this.authService = authService;
         }
 
+        #region Register
         [HttpGet]
         public ActionResult Register()
         {
@@ -34,10 +36,17 @@ namespace BinaryStudio.OurFaces.Controllers
             if (ModelState.IsValid)
             {
                 this.userRepository.CreateUser(model.UserName, model.Password);
+                this.authService.LogOn(model.UserName, remember: true);
+                TempData.Add(KEY_NEW_USERNAME, model.UserName);
+
+                return this.RedirectToAction("Greeting");
             }
+
             return this.View(model);
         }
+        #endregion
 
+        #region Logon
         [HttpGet]
         public ActionResult LogOn()
         {
@@ -49,9 +58,10 @@ namespace BinaryStudio.OurFaces.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (this.userRepository.ValidateUser(model.UserName, model.Password))
+                if (this.authService.ValidateUser(model.UserName, model.Password))
                 {
                     this.authService.LogOn(model.UserName, model.Remember);
+                    return this.RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError("", "Password or UserName invalid.");
@@ -60,16 +70,24 @@ namespace BinaryStudio.OurFaces.Controllers
 
             return this.View(model);
         }
+        #endregion
+
+        [HttpGet]
+        public ActionResult Greeting()
+        {
+            var name = this.TempData[KEY_NEW_USERNAME].ToString();
+            var model = new GreetingModel
+                            {
+                                Name = name
+                            };
+
+            return this.View(model);
+        }
+       
     }
 
-    public class LogonModel
+    public class GreetingModel
     {
-        [Required(ErrorMessage = "Hmmm... who are you?")]
-        public string UserName { get; set; }
-
-        [Required(ErrorMessage = "What about password?")]
-        public string Password { get; set; }
-
-        public bool Remember { get; set; }
+        public string Name { get; set; }
     }
 }

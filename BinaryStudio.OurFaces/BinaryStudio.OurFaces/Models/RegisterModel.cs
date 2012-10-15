@@ -13,8 +13,8 @@ namespace BinaryStudio.OurFaces.Models
         [StringLength(20, MinimumLength = 6,  ErrorMessage = "Password length must be between 6 and 20")]
         public string Password { get; set; }
 
-        [Required]
-        [Compare("Password")]
+        [Required(ErrorMessage = "Forgot?")]
+        [Compare("Password",ErrorMessage = "Passwords dont match!")]
         public string ConfirmPassword { get; set; }
     }
 }
