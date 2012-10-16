@@ -1,0 +1,62 @@
+﻿@model BinaryStudio.OurFaces.Controllers.AddFaceModel
+
+@{
+    ViewBag.Title = "title";
+    
+}
+
+
+@section AdditionalStyles{
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css " />
+}
+
+<div class="hero-unit form-horizontal">
+    @using (Html.BeginForm())
+    {
+        <legend>Please, leave some information about yourself.</legend>
+   
+        <div class="offset1">
+            @Html.ValidationSummary(true)
+            <div class="control-group">
+                <label class="control-label">
+                    Firstname</label>
+                <div class="controls">
+                    @Html.TextBoxFor(x => x.FirstName)
+                    @Html.ValidationMessageFor(x => x.FirstName)
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">
+                    Lastname</label>
+                <div class="controls">
+                    @Html.TextBoxFor(x => x.LastName)
+                    @Html.ValidationMessageFor(x => x.LastName)
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">
+                    Day of birth
+                </label>
+                <div class=" controls">
+                    @Html.TextBoxFor(x => x.Birthday, new { @id = "birth-datepicker", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="controls">
+                <input type="submit" value="Join!" class="btn btn-warning"/>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#birth-datepicker").datepicker({ 
+            changeMonth: true,
+            changeYear: true,
+            showOn: "button",
+            buttonImage: "/Content/images/calendar.gif"
+        });
+    });
+</script>
