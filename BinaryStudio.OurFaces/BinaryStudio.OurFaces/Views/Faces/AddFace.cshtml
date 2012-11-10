@@ -1,8 +1,9 @@
-﻿@model BinaryStudio.OurFaces.Controllers.AddFaceModel
+﻿@using System.Linq.Expressions
+@using BinaryStudio.OurFaces.Controllers
+@model BinaryStudio.OurFaces.Controllers.AddFaceModel
 
 @{
     ViewBag.Title = "title";
-    
 }
 
 
@@ -17,30 +18,17 @@
    
         <div class="offset1">
             @Html.ValidationSummary(true)
-            <div class="control-group">
-                <label class="control-label">
-                    Firstname</label>
-                <div class="controls">
-                    @Html.TextBoxFor(x => x.FirstName)
-                    @Html.ValidationMessageFor(x => x.FirstName)
-                </div>
-            </div>
+            
+            @TextBoxForWithValidation("Firstname", x => x.FirstName)
 
-            <div class="control-group">
-                <label class="control-label">
-                    Lastname</label>
-                <div class="controls">
-                    @Html.TextBoxFor(x => x.LastName)
-                    @Html.ValidationMessageFor(x => x.LastName)
-                </div>
-            </div>
+            @TextBoxForWithValidation("Lastname", x => x.LastName)
             
             <div class="control-group">
                 <label class="control-label">
                     Day of birth
                 </label>
-                <div class=" controls">
-                    @Html.TextBoxFor(x => x.Birthday, new { @id = "birth-datepicker", @disabled = "disabled" })
+                <div class="controls">
+                    @Html.TextBoxFor(x => x.Birthday, new { @id = "birth-datepicker" })
                 </div>
             </div>
             <div class="controls">
@@ -60,3 +48,15 @@
         });
     });
 </script>
+
+@helper TextBoxForWithValidation(string caption, Expression<Func<AddFaceModel, string>> expression)
+{
+    <div class="control-group">
+        <label class="control-label">
+            @caption</label>
+        <div class="controls">
+            @Html.TextBoxFor(expression)
+            @Html.ValidationMessageFor(expression)
+        </div>
+    </div>
+}
