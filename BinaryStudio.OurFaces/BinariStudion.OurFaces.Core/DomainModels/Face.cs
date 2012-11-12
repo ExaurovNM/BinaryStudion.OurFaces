@@ -1,15 +1,25 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BinariStudion.OurFaces.Core.DomainModels
 {
-    public class Face
+    public class Face : BaseEntity
     {
-        public Guid Id { get; set; }
+        public virtual Employee Employee { get; set; }
 
-        public virtual User User { get; set; }
-
-        public Guid UserId { get; set; }
+        public Guid EmployeeId { get; set; }
 
         public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime Birthday { get; set; }
+
+        public string ContactPhone { get; set; }
+
+        public string ContactSkype { get; set; }
+
+        public string ContactEmail { get; set; }
     }
 }

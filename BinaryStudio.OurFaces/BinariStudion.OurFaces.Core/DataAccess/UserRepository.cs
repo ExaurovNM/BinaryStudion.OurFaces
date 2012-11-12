@@ -18,22 +18,27 @@ namespace BinariStudion.OurFaces.Core.DataAccess
 
         public bool ValidateUser(string userName, string hashedPassword)
         {
-            var user = this.context.Users.FirstOrDefault(x => x.UserName == userName && x.Password == hashedPassword);
+            var user = context.Employees.FirstOrDefault(x => x.UserName == userName && x.Password == hashedPassword);
             
             return user != null;
         }
 
         public void CreateUser(string userName, string password)
         {
-            var user = new User
+            var user = new Employee
                            {
                                UserName = userName, 
-                               Password = this.hashProvider.ComputePasswordHash(userName, password),
+                               Password = hashProvider.ComputePasswordHash(userName, password),
                                Id = Guid.NewGuid()
                            };
 
-            this.context.Users.Add(user);
-            this.context.SaveChanges();
+            context.Employees.Add(user);
+            context.SaveChanges();
+        }
+
+        public Employee Get(string userName)
+        {
+            return context.Employees.FirstOrDefault(user => user.UserName == userName);
         }
     }
 }

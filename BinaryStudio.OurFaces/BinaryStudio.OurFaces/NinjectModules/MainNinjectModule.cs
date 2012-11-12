@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BinariStudion.OurFaces.Core.DataAccess;
+﻿using BinariStudion.OurFaces.Core.DataAccess;
 using BinaryStudio.OurFaces.Common.Utility;
 using BinaryStudio.OurFaces.Security;
 using Ninject.Modules;
@@ -14,9 +10,10 @@ namespace BinaryStudio.OurFaces.NinjectModules
     {
         public override void Load()
         {
-            this.Bind<IAuthService>().To<AuthServices>().InRequestScope();
-            this.Bind<IUserRepository>().To<UserRepository>().InRequestScope();
-            this.Bind<IHashProvider>().To<HashProvider>().InRequestScope();
+            Bind<IAuthService>().To<AuthServices>().InRequestScope();
+            Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            Bind<IHashProvider>().To<HashProvider>().InRequestScope();
+            Bind<IFacesRepository>().To<FacesRepository>().InRequestScope();
         }
     }
 }

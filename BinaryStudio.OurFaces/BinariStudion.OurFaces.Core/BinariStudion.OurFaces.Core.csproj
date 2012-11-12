@@ -48,10 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataBaseContext.cs" />
+    <Compile Include="DataAccess\FacesRepository.cs" />
+    <Compile Include="DataAccess\IFacesRepository.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="DataAccess\UserRepository.cs" />
+    <Compile Include="DomainModels\BaseEntity.cs" />
     <Compile Include="DomainModels\Face.cs" />
-    <Compile Include="DomainModels\User.cs" />
+    <Compile Include="DomainModels\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

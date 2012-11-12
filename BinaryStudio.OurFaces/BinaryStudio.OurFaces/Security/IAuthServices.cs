@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+﻿using BinariStudion.OurFaces.Core.DomainModels;
 
 namespace BinaryStudio.OurFaces.Security
 {
     public interface  IAuthService
     {
-        User GetAuthenticatedUser();
+        Employee GetAuthenticatedUser();
 
         bool ValidateUser(string userName, string password);
 

@@ -1,8 +1,9 @@
 using System;
+using System.Web;
 using System.Web.Security;
 using BinariStudion.OurFaces.Core.DataAccess;
+using BinariStudion.OurFaces.Core.DomainModels;
 using BinaryStudio.OurFaces.Common.Utility;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace BinaryStudio.OurFaces.Security
 {
@@ -17,9 +18,10 @@ namespace BinaryStudio.OurFaces.Security
             this.hashProvider = hashProvider;
         }
 
-        public User GetAuthenticatedUser()
+        public Employee GetAuthenticatedUser()
         {
-            throw new NotImplementedException();
+            var userName = HttpContext.Current.User.Identity.Name;
+            return userRepository.Get(userName);
         }
 
         public bool ValidateUser(string userName, string password)

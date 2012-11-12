@@ -5,15 +5,14 @@ namespace BinariStudion.OurFaces.Core.DataAccess
 {
     public class DataBaseContext : DbContext 
     {
-        public IDbSet<User> Users { get; set; }
+        public IDbSet<Employee> Employees { get; set; }
 
         public IDbSet<Face> Faces { get; set; } 
 
         // maping
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOptional(x => x.Face).WithRequired(x => x.User);
-
+            modelBuilder.Entity<Employee>().HasOptional(x => x.Face).WithRequired(x => x.Employee);
             base.OnModelCreating(modelBuilder);
         }
     }
